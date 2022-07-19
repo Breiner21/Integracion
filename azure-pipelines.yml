@@ -13,12 +13,21 @@ pool:
   
 
 steps:
+
 - task: NodeTool@0
   inputs:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
   
-
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'serviciosonar'
+    organization: 'demo-sonar-1'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'Demo-Sonar_Demo-integracion'
+    cliProjectName: 'Demo-integracion'
+    cliSources: '.'
 - script: |
     npm install
     npm run build
